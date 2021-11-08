@@ -6,9 +6,9 @@ module Api
         return render json: { errors: service.errors }, status: :unprocessable_entity unless service.valid?
         return render json: { errors: ['Unknown Provider'] }, status: :unprocessable_entity if service.file_parser.nil?
 
-        service.file_parser.new(sanitize_params[:file])
+        extractor = service.file_parser.new(sanitize_params[:file])
 
-        render json: {}, status: :accepted
+        render json: extractor.data, status: :accepted
       end
 
       private

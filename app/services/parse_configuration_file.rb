@@ -16,7 +16,7 @@ class ParseConfigurationFile
   end
 
   def file_parser
-    "Provider::#{provider}::Parse#{content_type}File".safe_constantize
+    "Parsers::#{content_type}::#{provider}".safe_constantize
   end
 
   def file_class
