@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post '/import', to: 'import#import'
+
+      resources :users, only: %i[show create update]
     end
   end
 end
