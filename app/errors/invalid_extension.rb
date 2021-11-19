@@ -1,0 +1,1 @@
+class InvalidExtension < StandardError; end
