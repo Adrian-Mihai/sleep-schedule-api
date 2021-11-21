@@ -4,9 +4,11 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      post '/import', to: 'import#import'
-
-      resources :users, only: %i[show create update]
+      resources :users, only: %i[show create update] do
+        resources :activities, only: :create
+        resources :sleep_sessions, only: :index
+        resources :activity_sessions, only: :index
+      end
     end
   end
 end
