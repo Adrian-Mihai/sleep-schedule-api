@@ -7,10 +7,10 @@ module Api
         return render json: { errors: ['Unknown Provider'] }, status: :unprocessable_entity if service.file_parser.nil?
         return render json: { errors: ['Unknown Activity'] }, status: :unprocessable_entity if service.activity_type.nil?
 
-        extractor = service.file_parser.new(sanitize_params[:file])
+        extractor = service.file_parser.new(sanitize_params[:file], user.id)
         return render json: { errors: extractor.errors }, status: :unprocessable_entity unless extractor.valid?
 
-        extractor.data.map! { |activity| activity.merge(uuid: SecureRandom.uuid, user_id: user.id) }
+        extractor.data.map! { |activity| activity.merge(uuid: SecureRandom.uuid) }
         service.activity_type.create(extractor.data)
 
         render json: {}, status: :created

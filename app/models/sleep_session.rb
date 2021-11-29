@@ -13,6 +13,8 @@ class SleepSession < ApplicationRecord
 
   belongs_to :user
 
+  has_one :activity_session
+
   private
 
   def sleep_duration

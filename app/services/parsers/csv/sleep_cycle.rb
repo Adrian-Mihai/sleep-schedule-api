@@ -18,6 +18,7 @@ module Parsers
 
       def record(row)
         {
+          user_id: @user.id,
           date: Date.parse(row[1].to_s),
           went_to_bed: Time.parse(row[0].to_s).utc,
           woke_up: Time.parse(row[1].to_s).utc,

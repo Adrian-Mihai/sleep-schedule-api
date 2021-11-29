@@ -18,12 +18,14 @@ ActiveRecord::Schema.define(version: 2021_11_21_202828) do
   create_table "activity_sessions", force: :cascade do |t|
     t.string "uuid", null: false
     t.bigint "user_id"
+    t.bigint "sleep_session_id"
     t.date "date", null: false
     t.float "active_time", null: false
     t.float "calories", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["date"], name: "index_activity_sessions_on_date", unique: true
+    t.index ["sleep_session_id"], name: "index_activity_sessions_on_sleep_session_id"
     t.index ["user_id"], name: "index_activity_sessions_on_user_id"
     t.index ["uuid"], name: "index_activity_sessions_on_uuid", unique: true
   end
