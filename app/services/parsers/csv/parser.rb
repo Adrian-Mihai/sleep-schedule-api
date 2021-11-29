@@ -10,12 +10,13 @@ module Parsers
 
       EXTENSION = 'csv'.freeze
 
-      def initialize(file)
+      def initialize(file, user_id)
         raise MissingParameters, 'The file is missing' if file.nil?
         raise InvalidExtension, 'File must be a CSV file' unless extension(file) == EXTENSION
 
+        @user = User.find(user_id)
         @data = extract(CSV.read(file, options))
-      rescue MissingParameters, InvalidExtension => e
+      rescue MissingParameters, InvalidExtension, ActiveRecord::RecordNotFound => e
         errors << e
       end
 

@@ -3,6 +3,8 @@ module Api
     class SleepSessionSerializer < ActiveModel::Serializer
       attributes :uuid, :date, :went_to_bed, :woke_up, :sleep_quality, :time_in_bed, :movements_per_hour
 
+      has_one :activity_session
+
       def went_to_bed
         object.went_to_bed.localtime.strftime('%T')
       end
